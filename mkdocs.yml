@@ -29,9 +29,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Overview:
+    - Book Introduction: overview/book-introduction.md
   - Best Practices:
     - best-practices/index.md
     - AI Tooling Guide: best-practices/ai-tooling-guide.md
+    - Collaborative Workflow Integration: best-practices/collaborative-workflow-integration.md
     - Cyclomatic Complexity: best-practices/cyclomatic-complexity.md
     - Factory Pattern: best-practices/factory-pattern.md
   - Anti-Patterns:
@@ -49,3 +52,4 @@ nav:
     - Separation of Concerns: antipatterns/separation-of-concerns.md
     - Solutionism: antipatterns/solutionism.md
     - Test Driven Design: antipatterns/test-driven-design.md
+    - Velocity Imbalance: antipatterns/velocity-imbalance.md
