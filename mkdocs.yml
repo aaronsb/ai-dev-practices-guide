@@ -29,6 +29,8 @@ theme:
     - navigation.expand
     - navigation.indexes
     - content.code.copy
+  extra_css:
+    - assets/stylesheets/custom.css
 
 markdown_extensions:
   - admonition
