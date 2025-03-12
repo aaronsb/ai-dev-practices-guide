@@ -1,0 +1,2462 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guide to best practices and anti-patterns in AI development">
+      
+      
+        <meta name="author" content="AI Development Team">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../collaborative-workflow-integration/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>AI Tooling Guide - AI Development Practices Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ai-native-developer-tooling-a-guide-for-enhancing-agent-productivity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Development Practices Guide" class="md-header__button md-logo" aria-label="AI Development Practices Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Development Practices Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AI Tooling Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aaronsb/ai-dev-practices-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-dev-practices-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Development Practices Guide" class="md-nav__button md-logo" aria-label="AI Development Practices Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Development Practices Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aaronsb/ai-dev-practices-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-dev-practices-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/book-introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Book Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Best Practices
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Best Practices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    AI Tooling Guide
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    AI Tooling Guide
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-principles-of-ai-native-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Principles of AI-Native Tooling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Principles of AI-Native Tooling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-token-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Token Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deterministic-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Deterministic Environments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-domain-knowledge-accessibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Domain Knowledge Accessibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-process-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Process Guidance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-native-tooling-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI-Native Tooling Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI-Native Tooling Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-log-insulation-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Log Insulation Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-domain-knowledge-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Domain Knowledge Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pre-prompting-with-clinerules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Pre-Prompting with .clinerules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-static-analysis-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Static Analysis Adapters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-specific-ai-tooling-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project-Specific AI Tooling Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Project-Specific AI Tooling Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architecture-pattern-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Architecture Pattern Validator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-domain-model-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Domain Model Extractor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-api-contract-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. API Contract Validator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-small-essential-ai-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting Small: Essential AI Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolving-your-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evolving Your Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-a-clinerules-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing a .clinerules Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing a .clinerules Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-basic-clinerules-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Basic .clinerules File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-pre-prompt-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Pre-prompt Instructions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-ai-native-development-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional AI-Native Development Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional AI-Native Development Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-context-compression-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Context Compression Mechanisms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-design-pattern-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Design Pattern Templates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-code-generation-validators" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Code Generation Validators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-entity-relationship-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Entity Relationship Visualization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-case-coverage-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Test Case Coverage Explorer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-complexity-budget-enforcer" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Complexity Budget Enforcer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterns-for-scale-from-small-to-large-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patterns for Scale: From Small to Large Projects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Patterns for Scale: From Small to Large Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-small-projects-1-5-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Small Projects (1-5 developers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-medium-projects-5-20-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Medium Projects (5-20 developers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-large-projects-20-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Large Projects (20+ developers)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../collaborative-workflow-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Collaborative Workflow Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cyclomatic-complexity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cyclomatic Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../factory-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Factory Pattern
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../antipatterns/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Anti-Patterns
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Anti-Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/ai-tooling-antipatterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Tooling Antipatterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/context-overwhelming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Context Overwhelming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/dependency-blindness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dependency Blindness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/glossary-avoidance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Glossary Avoidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/historical-amnesia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Historical Amnesia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/implementation-tunneling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Implementation Tunneling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/inconsistent-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inconsistent Conventions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/library-reinvention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Library Reinvention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/premature-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Premature Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/purpose-drift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Purpose Drift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/separation-of-concerns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Separation of Concerns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/solutionism/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutionism
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/test-driven-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../antipatterns/velocity-imbalance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Velocity Imbalance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-principles-of-ai-native-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Principles of AI-Native Tooling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Principles of AI-Native Tooling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-token-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Token Efficiency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deterministic-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Deterministic Environments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-domain-knowledge-accessibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Domain Knowledge Accessibility
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-process-guidance" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Process Guidance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ai-native-tooling-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI-Native Tooling Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AI-Native Tooling Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-log-insulation-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Log Insulation Layer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-domain-knowledge-indexing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Domain Knowledge Indexing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pre-prompting-with-clinerules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Pre-Prompting with .clinerules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-static-analysis-adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Static Analysis Adapters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-specific-ai-tooling-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project-Specific AI Tooling Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Project-Specific AI Tooling Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-architecture-pattern-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Architecture Pattern Validator
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-domain-model-extractor" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Domain Model Extractor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-api-contract-validator" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. API Contract Validator
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#starting-small-essential-ai-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Starting Small: Essential AI Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evolving-your-tooling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evolving Your Tooling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-with-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration with Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-a-clinerules-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing a .clinerules Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing a .clinerules Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-basic-clinerules-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Basic .clinerules File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-pre-prompt-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add Pre-prompt Instructions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-ai-native-development-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional AI-Native Development Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional AI-Native Development Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-context-compression-mechanisms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Context Compression Mechanisms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-design-pattern-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Design Pattern Templates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-code-generation-validators" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Code Generation Validators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-entity-relationship-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Entity Relationship Visualization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-test-case-coverage-explorer" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Test Case Coverage Explorer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-complexity-budget-enforcer" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Complexity Budget Enforcer
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#patterns-for-scale-from-small-to-large-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patterns for Scale: From Small to Large Projects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Patterns for Scale: From Small to Large Projects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-small-projects-1-5-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Small Projects (1-5 developers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-medium-projects-5-20-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Medium Projects (5-20 developers)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-large-projects-20-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      For Large Projects (20+ developers)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="ai-native-developer-tooling-a-guide-for-enhancing-agent-productivity">AI-Native Developer Tooling: A Guide for Enhancing Agent Productivity<a class="headerlink" href="#ai-native-developer-tooling-a-guide-for-enhancing-agent-productivity" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>This guide explores the design and implementation of developer tools specifically optimized for AI coding agents. While traditional developer tools are designed for human developers, AI agents have different strengths, limitations, and information processing patterns that warrant specialized tooling approaches.</p>
+<p>By creating "AI-native" tooling, we can dramatically improve the productivity, accuracy, and effectiveness of AI coding agents, allowing them to produce better code with less developer oversight.</p>
+<h2 id="core-principles-of-ai-native-tooling">Core Principles of AI-Native Tooling<a class="headerlink" href="#core-principles-of-ai-native-tooling" title="Permanent link">&para;</a></h2>
+<h3 id="1-token-efficiency">1. Token Efficiency<a class="headerlink" href="#1-token-efficiency" title="Permanent link">&para;</a></h3>
+<p>AI models process information as tokens, with practical and economic limits on token usage:</p>
+<ul>
+<li><strong>Minimize Unnecessary Output</strong>: Filter verbose logs, spinners, progress bars, and other human-friendly but token-inefficient outputs</li>
+<li><strong>Structured Information</strong>: Present information in compact, structured formats rather than verbose natural language</li>
+<li><strong>Incremental Processing</strong>: Break large tasks into smaller chunks to avoid context limitations</li>
+</ul>
+<h3 id="2-deterministic-environments">2. Deterministic Environments<a class="headerlink" href="#2-deterministic-environments" title="Permanent link">&para;</a></h3>
+<p>AI agents perform better with predictable, consistent environments:</p>
+<ul>
+<li><strong>Reproducible Setups</strong>: Ensure identical environments for analysis and execution</li>
+<li><strong>Version Pinning</strong>: Pin dependencies to specific versions to prevent drift</li>
+<li><strong>Explicit Configuration</strong>: Make all configuration explicit rather than depending on inference</li>
+</ul>
+<h3 id="3-domain-knowledge-accessibility">3. Domain Knowledge Accessibility<a class="headerlink" href="#3-domain-knowledge-accessibility" title="Permanent link">&para;</a></h3>
+<p>Unlike humans, AI agents can't accumulate domain knowledge over time:</p>
+<ul>
+<li><strong>Local Context</strong>: Provide domain-specific information in the immediate context</li>
+<li><strong>Searchable References</strong>: Create efficient search mechanisms for larger knowledge bases</li>
+<li><strong>Relationship Graphs</strong>: Map connections between domain concepts to enhance understanding</li>
+</ul>
+<h3 id="4-process-guidance">4. Process Guidance<a class="headerlink" href="#4-process-guidance" title="Permanent link">&para;</a></h3>
+<p>AI agents benefit from explicit process frameworks:</p>
+<ul>
+<li><strong>Decision Trees</strong>: Formalize decision points and criteria</li>
+<li><strong>Standard Patterns</strong>: Establish reusable patterns for common tasks</li>
+<li><strong>Self-validation</strong>: Build in mechanisms for the agent to validate its own work</li>
+</ul>
+<h2 id="ai-native-tooling-patterns">AI-Native Tooling Patterns<a class="headerlink" href="#ai-native-tooling-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="1-log-insulation-layer">1. Log Insulation Layer<a class="headerlink" href="#1-log-insulation-layer" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Shield AI agents from verbose, token-heavy outputs while preserving human readability.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code>run_step<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">step_name</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">log_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$TEMP_DIR</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">.log&quot;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">command</span><span class="o">=</span><span class="nv">$3</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;→ </span><span class="nv">$step_name</span><span class="s2">... &quot;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VERBOSE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="c1"># Direct output for humans</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}${</span><span class="nv">CHECK_MARK</span><span class="si">}</span><span class="s2"> Success</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}${</span><span class="nv">X_MARK</span><span class="si">}</span><span class="s2"> Failed</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="c1"># Redirected output for AI</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$command</span><span class="s2"> &gt; &#39;</span><span class="nv">$log_file</span><span class="s2">&#39; 2&gt;&amp;1&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}${</span><span class="nv">CHECK_MARK</span><span class="si">}</span><span class="s2"> Success</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2"> (log: </span><span class="nv">$log_file</span><span class="s2">)&quot;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}${</span><span class="nv">X_MARK</span><span class="si">}</span><span class="s2"> Failed</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2"> (see details in </span><span class="nv">$log_file</span><span class="s2">)&quot;</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div>
+<p><strong>Benefits</strong>:
+- Reduces token consumption by orders of magnitude
+- Preserves detailed logs for human debugging
+- Provides clear success/failure signals to the AI
+- Scales to any command execution</p>
+<h3 id="2-domain-knowledge-indexing">2. Domain Knowledge Indexing<a class="headerlink" href="#2-domain-knowledge-indexing" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Make domain documentation searchable and accessible to AI agents.</p>
+<p><strong>Implementation</strong>:
+- Scrape and convert documentation to markdown format
+- Build a searchable database with full-text indexing
+- Create simple CLI tools for querying knowledge
+- Maintain relationship graphs between documents</p>
+<p><strong>Benefits</strong>:
+- Provides targeted answers to domain questions
+- Reduces hallucination by offering authoritative references
+- Enables relationship-based exploration of complex domains
+- Works offline without requiring constant API access</p>
+<h3 id="3-pre-prompting-with-clinerules">3. Pre-Prompting with .clinerules<a class="headerlink" href="#3-pre-prompting-with-clinerules" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Direct AI agents to use appropriate tools for specific tasks without manual instruction.</p>
+<p><strong>Implementation</strong>:
+Create a <code>.clinerules</code> file at the project root:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tooling</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">documentation</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./search-docs.sh</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;seeking</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">reference&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;need</span><span class="nv"> </span><span class="s">domain</span><span class="nv"> </span><span class="s">knowledge&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;unclear</span><span class="nv"> </span><span class="s">requirements&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./search-docs.sh</span><span class="nv"> </span><span class="s">api-authentication&quot;</span>
+
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./build-local.sh</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;need</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">compile&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;testing</span><span class="nv"> </span><span class="s">changes&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;preparing</span><span class="nv"> </span><span class="s">deployment&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./build-local.sh</span><span class="nv"> </span><span class="s">--verbose&quot;</span>
+
+<span class="w">  </span><span class="nt">static_analysis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./analyze-code.sh</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;starting</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">feature&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;reviewing</span><span class="nv"> </span><span class="s">code&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;refactoring&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">example</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./analyze-code.sh</span><span class="nv"> </span><span class="s">src/main.ts&quot;</span>
+</code></pre></div>
+<p><strong>Usage in agent prompt</strong>:
+<div class="highlight"><pre><span></span><code>Before coding, consult the .clinerules file for appropriate tooling for each task.
+For documentation queries, use ./search-docs.sh instead of making assumptions.
+For building and testing, use ./build-local.sh to avoid verbose output.
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Standardizes tool usage across interactions
+- Reduces need for repetitive instruction
+- Enables project-specific workflow optimization
+- Creates a "playbook" the agent can follow</p>
+<h3 id="4-static-analysis-adapters">4. Static Analysis Adapters<a class="headerlink" href="#4-static-analysis-adapters" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Translate complex static analysis results into AI-friendly formats.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// analyze-code.js</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">executeAnalysis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">filePath</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Run multiple analysis tools</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lintResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">runEslint</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">typeResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">runTypeChecker</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">complexityResults</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">runComplexityAnalysis</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+
+<span class="w">  </span><span class="c1">// Synthesize results into AI-friendly format</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">issues</span><span class="o">:</span><span class="w"> </span><span class="nx">summarizeIssues</span><span class="p">(</span><span class="nx">lintResults</span><span class="p">,</span><span class="w"> </span><span class="nx">typeResults</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">complexity</span><span class="o">:</span><span class="w"> </span><span class="nx">summarizeComplexity</span><span class="p">(</span><span class="nx">complexityResults</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">concepts</span><span class="o">:</span><span class="w"> </span><span class="nx">extractConcepts</span><span class="p">(</span><span class="nx">filePath</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">dependencies</span><span class="o">:</span><span class="w"> </span><span class="nx">analyzeDependencies</span><span class="p">(</span><span class="nx">filePath</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">recommendations</span><span class="o">:</span><span class="w"> </span><span class="nx">generateRecommendations</span><span class="p">(</span><span class="nx">filePath</span><span class="p">)</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
+<p><strong>Benefits</strong>:
+- Provides pre-processed analysis to guide agent decisions
+- Highlights important patterns and anti-patterns
+- Reduces token usage by filtering unnecessary details
+- Creates a standardized view across multiple tools</p>
+<h2 id="project-specific-ai-tooling-examples">Project-Specific AI Tooling Examples<a class="headerlink" href="#project-specific-ai-tooling-examples" title="Permanent link">&para;</a></h2>
+<h3 id="1-architecture-pattern-validator">1. Architecture Pattern Validator<a class="headerlink" href="#1-architecture-pattern-validator" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Enforce approved architectural patterns during development.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// architecture-validator.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ArchitectureValidator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">patterns</span><span class="o">:</span><span class="w"> </span><span class="kt">Pattern</span><span class="p">[];</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">projectRoot</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Load project-specific architectural patterns</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loadPatternsFromConfig</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">projectRoot</span><span class="si">}</span><span class="sb">/.archpatterns`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">validate</span><span class="p">(</span><span class="nx">filePath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">fileContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseToAST</span><span class="p">(</span><span class="nx">fileContent</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">violations</span><span class="o">:</span><span class="w"> </span><span class="kt">Violation</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">    </span><span class="c1">// Check each pattern against the AST</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">pattern</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">patterns</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">patternViolations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">pattern</span><span class="p">.</span><span class="nx">check</span><span class="p">(</span><span class="nx">ast</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">violations</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">patternViolations</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">filePath</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">conformsToArchitecture</span><span class="o">:</span><span class="w"> </span><span class="kt">violations.length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">violations</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">recommendations</span><span class="o">:</span><span class="w"> </span><span class="kt">generateRecommendations</span><span class="p">(</span><span class="nx">violations</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./validate-architecture.sh<span class="w"> </span>src/api/users.ts
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Ensures AI-generated code follows established patterns
+- Provides immediate feedback on architectural violations
+- Offers specific recommendations for fixing issues
+- Reduces review cycles by catching issues early</p>
+<h3 id="2-domain-model-extractor">2. Domain Model Extractor<a class="headerlink" href="#2-domain-model-extractor" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Provide AI agents with a clear understanding of domain models and relationships.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// domain-extractor.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">DomainModelExtractor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">extractModels</span><span class="p">(</span><span class="nx">projectRoot</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">DomainModel</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Find all model definitions</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">modelFiles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">findModelFiles</span><span class="p">(</span><span class="nx">projectRoot</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Extract domain models and their relationships</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">models</span><span class="o">:</span><span class="w"> </span><span class="kt">DomainModel</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">modelFiles</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">fileContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">extractedModels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">parseModels</span><span class="p">(</span><span class="nx">fileContent</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">models</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">extractedModels</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Analyze relationships between models</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">analyzeRelationships</span><span class="p">(</span><span class="nx">models</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">models</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">model</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">({</span>
+<span class="w">      </span><span class="p">...</span><span class="nx">model</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">relationships</span><span class="o">:</span><span class="w"> </span><span class="kt">relationships.filter</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">source</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">target</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}));</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./extract-domain-models.sh<span class="w"> </span>--format<span class="o">=</span>json
+</code></pre></div></p>
+<p><strong>Output Example</strong>:
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UUID&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;role&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enum&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;ADMIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;USER&quot;</span><span class="p">]}</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;relationships&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;OneToMany&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Order&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;fieldName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;orders&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Provides clear domain model references
+- Helps AI understand existing models before extending them
+- Reduces errors in relationship management
+- Supports consistent naming patterns</p>
+<h3 id="3-api-contract-validator">3. API Contract Validator<a class="headerlink" href="#3-api-contract-validator" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Ensure AI-generated code adheres to established API contracts.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// api-validator.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ApiContractValidator</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">contracts</span><span class="o">:</span><span class="w"> </span><span class="kt">ApiContract</span><span class="p">[];</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">contractsPath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">contracts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">loadContracts</span><span class="p">(</span><span class="nx">contractsPath</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">validateImplementation</span><span class="p">(</span><span class="nx">apiImplementationPath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">implementation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">parseApiImplementation</span><span class="p">(</span><span class="nx">apiImplementationPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">violations</span><span class="o">:</span><span class="w"> </span><span class="kt">Violation</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">    </span><span class="c1">// Check each endpoint against its contract</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">endpoint</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">implementation</span><span class="p">.</span><span class="nx">endpoints</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">contract</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">contracts</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">c</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="nx">c</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="w">        </span><span class="nx">pathMatchesPattern</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span>
+<span class="w">      </span><span class="p">);</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">contract</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">violations</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+<span class="w">          </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ERROR&#39;</span><span class="p">,</span>
+<span class="w">          </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="sb">`No contract found for </span><span class="si">${</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">method</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">endpoint</span><span class="p">.</span><span class="nx">path</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">        </span><span class="p">});</span>
+<span class="w">        </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="c1">// Validate parameters, return types, etc.</span>
+<span class="w">      </span><span class="nx">violations</span><span class="p">.</span><span class="nx">push</span><span class="p">(...</span><span class="nx">validateEndpoint</span><span class="p">(</span><span class="nx">endpoint</span><span class="p">,</span><span class="w"> </span><span class="nx">contract</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">implementationPath</span><span class="o">:</span><span class="w"> </span><span class="kt">apiImplementationPath</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">conformsToContract</span><span class="o">:</span><span class="w"> </span><span class="kt">violations.length</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">violations</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">recommendations</span><span class="o">:</span><span class="w"> </span><span class="kt">generateRecommendations</span><span class="p">(</span><span class="nx">violations</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./validate-api.sh<span class="w"> </span>src/controllers/userController.ts
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Ensures AI-generated APIs match defined contracts
+- Prevents breaking changes to public APIs
+- Provides specific guidance on contract violations
+- Enforces consistent API design</p>
+<h2 id="implementation-strategy">Implementation Strategy<a class="headerlink" href="#implementation-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="starting-small-essential-ai-tooling">Starting Small: Essential AI Tooling<a class="headerlink" href="#starting-small-essential-ai-tooling" title="Permanent link">&para;</a></h3>
+<p>Begin with these foundational tools:</p>
+<ol>
+<li><strong>Log Insulation Script</strong>: Create wrapper scripts for build, test, and deployment commands</li>
+<li><strong>Domain Documentation Indexer</strong>: Convert project documentation to searchable markdown</li>
+<li><strong>.clinerules File</strong>: Define basic rules for when to use each tool</li>
+<li><strong>Simplified Static Analysis</strong>: Create a basic analysis script that highlights key issues</li>
+</ol>
+<h3 id="evolving-your-tooling">Evolving Your Tooling<a class="headerlink" href="#evolving-your-tooling" title="Permanent link">&para;</a></h3>
+<p>As you work with AI agents more extensively:</p>
+<ol>
+<li><strong>Track Pain Points</strong>: Note where AI agents consistently struggle</li>
+<li><strong>Measure Token Usage</strong>: Identify high-token-consumption workflows</li>
+<li><strong>Standardize Patterns</strong>: Create templates for common development tasks</li>
+<li><strong>Build Custom Validators</strong>: Develop project-specific validation tools</li>
+</ol>
+<h3 id="integration-with-workflow">Integration with Workflow<a class="headerlink" href="#integration-with-workflow" title="Permanent link">&para;</a></h3>
+<p>For optimal results:</p>
+<ol>
+<li><strong>Include in Onboarding</strong>: Mention available tools in your initial prompt</li>
+<li><strong>Consistent References</strong>: Use consistent tool names across conversations</li>
+<li><strong>Tool Chaining</strong>: Design tools to work together through standardized outputs</li>
+<li><strong>Feedback Loop</strong>: Refine tools based on agent performance</li>
+</ol>
+<h2 id="implementing-a-clinerules-approach">Implementing a .clinerules Approach<a class="headerlink" href="#implementing-a-clinerules-approach" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-basic-clinerules-file">Create a Basic .clinerules File<a class="headerlink" href="#create-a-basic-clinerules-file" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .clinerules - AI agent tooling guidance</span>
+<span class="nt">tooling</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># Documentation and knowledge tools</span>
+<span class="w">  </span><span class="nt">domain_knowledge</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./search-docs.sh</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Search</span><span class="nv"> </span><span class="s">project-specific</span><span class="nv"> </span><span class="s">documentation&quot;</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Looking</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">project-specific</span><span class="nv"> </span><span class="s">concepts&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Researching</span><span class="nv"> </span><span class="s">API</span><span class="nv"> </span><span class="s">details&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Seeking</span><span class="nv"> </span><span class="s">implementation</span><span class="nv"> </span><span class="s">examples&quot;</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./search-docs.sh</span><span class="nv"> </span><span class="s">authentication&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./search-docs.sh</span><span class="nv"> </span><span class="s">-t</span><span class="nv"> </span><span class="s">&#39;API</span><span class="nv"> </span><span class="s">Reference&#39;&quot;</span>
+
+<span class="w">  </span><span class="c1"># Build and test tools</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./build-local.sh</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">project</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">reduced</span><span class="nv"> </span><span class="s">output</span><span class="nv"> </span><span class="s">noise&quot;</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Compiling</span><span class="nv"> </span><span class="s">code&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Preparing</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">tests&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Verifying</span><span class="nv"> </span><span class="s">changes&quot;</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./build-local.sh&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./build-local.sh</span><span class="nv"> </span><span class="s">--verbose&quot;</span>
+
+<span class="w">  </span><span class="c1"># Analysis tools</span>
+<span class="w">  </span><span class="nt">static_analysis</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./analyze-code.sh</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Run</span><span class="nv"> </span><span class="s">static</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">code</span><span class="nv"> </span><span class="s">files&quot;</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Starting</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">component&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Reviewing</span><span class="nv"> </span><span class="s">existing</span><span class="nv"> </span><span class="s">code&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Refactoring&quot;</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./analyze-code.sh</span><span class="nv"> </span><span class="s">src/component.ts&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./analyze-code.sh</span><span class="nv"> </span><span class="s">--fix</span><span class="nv"> </span><span class="s">src/component.ts&quot;</span>
+
+<span class="w">  </span><span class="nt">domain_model</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./extract-domain-model.sh</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Extract</span><span class="nv"> </span><span class="s">domain</span><span class="nv"> </span><span class="s">model</span><span class="nv"> </span><span class="s">information&quot;</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Working</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">models&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Designing</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">entities&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Extending</span><span class="nv"> </span><span class="s">existing</span><span class="nv"> </span><span class="s">models&quot;</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./extract-domain-model.sh&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./extract-domain-model.sh</span><span class="nv"> </span><span class="s">User</span><span class="nv"> </span><span class="s">Order&quot;</span>
+
+<span class="nt">workflows</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">new_feature</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Search</span><span class="nv"> </span><span class="s">docs</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">related</span><span class="nv"> </span><span class="s">concepts&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Extract</span><span class="nv"> </span><span class="s">relevant</span><span class="nv"> </span><span class="s">domain</span><span class="nv"> </span><span class="s">models&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Run</span><span class="nv"> </span><span class="s">static</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">related</span><span class="nv"> </span><span class="s">components&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Create</span><span class="nv"> </span><span class="s">implementation</span><span class="nv"> </span><span class="s">following</span><span class="nv"> </span><span class="s">factory</span><span class="nv"> </span><span class="s">pattern&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Build</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">validate</span><span class="nv"> </span><span class="s">implementation&quot;</span>
+<span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_knowledge</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain_model</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static_analysis</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build</span>
+</code></pre></div>
+<h3 id="add-pre-prompt-instructions">Add Pre-prompt Instructions<a class="headerlink" href="#add-pre-prompt-instructions" title="Permanent link">&para;</a></h3>
+<p>Include these instructions in your initial prompt to the AI agent:</p>
+<div class="highlight"><pre><span></span><code>This project uses AI-optimized tooling for development tasks. At the start of our session, please:
+
+1. Review the .clinerules file at the project root to understand available tools
+2. Use the specified tools for domain knowledge, code analysis, and building
+3. Follow established workflows for common tasks
+4. Default to using project tools rather than suggesting manual approaches
+
+For any area where you&#39;re uncertain about domain details, use ./search-docs.sh before making assumptions.
+</code></pre></div>
+<h2 id="additional-ai-native-development-patterns">Additional AI-Native Development Patterns<a class="headerlink" href="#additional-ai-native-development-patterns" title="Permanent link">&para;</a></h2>
+<p>Beyond the core tooling approaches, several complementary patterns can enhance AI agent productivity across projects of different sizes and complexities.</p>
+<h3 id="1-context-compression-mechanisms">1. Context Compression Mechanisms<a class="headerlink" href="#1-context-compression-mechanisms" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Reduce token consumption when working with large codebases.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// context-compressor.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ContextCompressor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">compress</span><span class="p">(</span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[],</span><span class="w"> </span><span class="nx">topic</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">CompressedContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Identify relevant code sections based on topic</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">relevantParts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">findRelevantCodeParts</span><span class="p">(</span><span class="nx">files</span><span class="p">,</span><span class="w"> </span><span class="nx">topic</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Create semantic summaries of modules</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="kr">module</span><span class="nx">Summaries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">generateModuleSummaries</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Extract key interfaces and types</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">interfaces</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">extractInterfaces</span><span class="p">(</span><span class="nx">files</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">relevantCode</span><span class="o">:</span><span class="w"> </span><span class="kt">relevantParts</span><span class="p">,</span>
+<span class="w">      </span><span class="kr">module</span><span class="nx">Summaries</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">interfaces</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">totalSizeReduction</span><span class="o">:</span><span class="w"> </span><span class="kt">this.calculateReduction</span><span class="p">(</span><span class="nx">files</span><span class="p">,</span><span class="w"> </span><span class="nx">relevantParts</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">findRelevantCodeParts</span><span class="p">(</span><span class="nx">files</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[],</span><span class="w"> </span><span class="nx">topic</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">CodePart</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation details...</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Additional helper methods...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./compress-context.sh<span class="w"> </span>--topic<span class="o">=</span><span class="s2">&quot;user authentication&quot;</span><span class="w"> </span>--files<span class="o">=</span><span class="s2">&quot;src/auth/**/*.ts&quot;</span>
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Makes large codebases manageable for AI context windows
+- Focuses attention on relevant components
+- Provides necessary context without overwhelming the agent
+- Scales to enterprise-level projects</p>
+<h3 id="2-design-pattern-templates">2. Design Pattern Templates<a class="headerlink" href="#2-design-pattern-templates" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Guide AI agents to implement consistent design patterns.</p>
+<p><strong>Implementation</strong>:
+Create a directory of pattern templates:
+<div class="highlight"><pre><span></span><code>patterns/
+├── factory/
+│   ├── template.ts
+│   ├── example.ts
+│   └── usage.md
+├── repository/
+│   ├── template.ts
+│   ├── example.ts
+│   └── usage.md
+└── ...
+</code></pre></div></p>
+<p>Sample factory pattern template:
+<div class="highlight"><pre><span></span><code><span class="c1">// patterns/factory/template.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Entity interface</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}</span><span class="nx">Factory</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">create</span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}(</span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="nx">CreateParams</span><span class="p">}})</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}};</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">Default</span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}</span><span class="nx">Factory</span><span class="w"> </span><span class="k">implements</span><span class="w"> </span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}</span><span class="nx">Factory</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span>
+<span class="w">    </span><span class="c1">// Dependencies</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">  </span><span class="nx">create</span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}(</span><span class="nx">params</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="nx">CreateParams</span><span class="p">}})</span><span class="o">:</span><span class="w"> </span><span class="p">{{</span><span class="nx">EntityName</span><span class="p">}}</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./apply-pattern.sh<span class="w"> </span>factory<span class="w"> </span><span class="nv">EntityName</span><span class="o">=</span>User<span class="w"> </span><span class="nv">CreateParams</span><span class="o">=</span>UserCreationParams
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Ensures consistent pattern implementation
+- Reduces design decisions for common patterns
+- Provides working examples for reference
+- Enforces architectural guidelines</p>
+<h3 id="3-code-generation-validators">3. Code Generation Validators<a class="headerlink" href="#3-code-generation-validators" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Validate AI-generated code against project standards before integration.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// validation-pipeline.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ValidationPipeline</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">validators</span><span class="o">:</span><span class="w"> </span><span class="kt">Validator</span><span class="p">[];</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">validators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="ow">new</span><span class="w"> </span><span class="nx">StyleGuideValidator</span><span class="p">(),</span>
+<span class="w">      </span><span class="ow">new</span><span class="w"> </span><span class="nx">ArchitectureValidator</span><span class="p">(),</span>
+<span class="w">      </span><span class="ow">new</span><span class="w"> </span><span class="nx">SecurityValidator</span><span class="p">(),</span>
+<span class="w">      </span><span class="ow">new</span><span class="w"> </span><span class="nx">TestCoverageValidator</span><span class="p">(),</span>
+<span class="w">      </span><span class="ow">new</span><span class="w"> </span><span class="nx">PerformanceValidator</span><span class="p">()</span>
+<span class="w">    </span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">validate</span><span class="p">(</span><span class="nx">generatedCode</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationResult</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">results</span><span class="o">:</span><span class="w"> </span><span class="kt">ValidationStepResult</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">validator</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">validators</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">validator</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">generatedCode</span><span class="p">);</span>
+<span class="w">      </span><span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+
+<span class="w">      </span><span class="c1">// Stop on critical failures</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">severity</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;critical&#39;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="nx">result</span><span class="p">.</span><span class="nx">passed</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">passed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">results</span><span class="p">.</span><span class="nx">every</span><span class="p">(</span><span class="nx">r</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">passed</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">passed</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">results</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">suggestions</span><span class="o">:</span><span class="w"> </span><span class="kt">this.generateSuggestions</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">generateSuggestions</span><span class="p">(</span><span class="nx">results</span><span class="o">:</span><span class="w"> </span><span class="kt">ValidationStepResult</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Generate actionable suggestions based on results</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./validate-generated.sh<span class="w"> </span>--file<span class="o">=</span>src/generated-component.ts
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Catches issues before human review
+- Provides actionable feedback for improvement
+- Enforces project standards automatically
+- Reduces review cycles</p>
+<h3 id="4-entity-relationship-visualization">4. Entity Relationship Visualization<a class="headerlink" href="#4-entity-relationship-visualization" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Generate visual representations of complex domain models for AI comprehension.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// er-visualizer.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">EntityRelationshipVisualizer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">visualize</span><span class="p">(</span><span class="nx">modelPaths</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Extract entities and relationships</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">entities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">extractEntities</span><span class="p">(</span><span class="nx">modelPaths</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">relationships</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">extractRelationships</span><span class="p">(</span><span class="nx">modelPaths</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Generate Mermaid diagram</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">generateMermaidDiagram</span><span class="p">(</span><span class="nx">entities</span><span class="p">,</span><span class="w"> </span><span class="nx">relationships</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="nx">extractEntities</span><span class="p">(</span><span class="nx">modelPaths</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Entity</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="nx">extractRelationships</span><span class="p">(</span><span class="nx">modelPaths</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">Relationship</span><span class="p">[]</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">generateMermaidDiagram</span><span class="p">(</span><span class="nx">entities</span><span class="o">:</span><span class="w"> </span><span class="kt">Entity</span><span class="p">[],</span><span class="w"> </span><span class="nx">relationships</span><span class="o">:</span><span class="w"> </span><span class="kt">Relationship</span><span class="p">[])</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">diagram</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;erDiagram\n&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Add entities</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entity</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entities</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">diagram</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`  </span><span class="si">${</span><span class="nx">entity</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> {\n`</span><span class="p">;</span>
+
+<span class="w">      </span><span class="c1">// Add attributes</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">attribute</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entity</span><span class="p">.</span><span class="nx">attributes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">diagram</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`    </span><span class="si">${</span><span class="nx">attribute</span><span class="p">.</span><span class="kr">type</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">attribute</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">\n`</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="nx">diagram</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;  }\n&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Add relationships</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">rel</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">relationships</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">diagram</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`  </span><span class="si">${</span><span class="nx">rel</span><span class="p">.</span><span class="nx">source</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">mapCardinalitySymbol</span><span class="p">(</span><span class="nx">rel</span><span class="p">.</span><span class="nx">sourceCardinality</span><span class="p">)</span><span class="si">}</span><span class="sb"> -- </span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">mapCardinalitySymbol</span><span class="p">(</span><span class="nx">rel</span><span class="p">.</span><span class="nx">targetCardinality</span><span class="p">)</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">rel</span><span class="p">.</span><span class="nx">target</span><span class="si">}</span><span class="sb"> : &quot;</span><span class="si">${</span><span class="nx">rel</span><span class="p">.</span><span class="nx">description</span><span class="si">}</span><span class="sb">&quot;\n`</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">diagram</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">mapCardinalitySymbol</span><span class="p">(</span><span class="nx">cardinality</span><span class="o">:</span><span class="w"> </span><span class="kt">Cardinality</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./visualize-model.sh<span class="w"> </span>src/models/
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Creates visual understanding of complex relationships
+- Simplifies domain comprehension
+- Highlights potential domain inconsistencies
+- Generates reference material for documentation</p>
+<h3 id="5-test-case-coverage-explorer">5. Test Case Coverage Explorer<a class="headerlink" href="#5-test-case-coverage-explorer" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Help AI agents understand existing test patterns and coverage.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// test-explorer.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">TestCoverageExplorer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">async</span><span class="w"> </span><span class="nx">explore</span><span class="p">(</span><span class="nx">sourcePath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">TestCoverageReport</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Analyze source code</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">sourceAnalysis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">analyzeSource</span><span class="p">(</span><span class="nx">sourcePath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Find corresponding tests</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">tests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">findCorrespondingTests</span><span class="p">(</span><span class="nx">sourcePath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Analyze test coverage</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">coverage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">analyzeTestCoverage</span><span class="p">(</span><span class="nx">sourcePath</span><span class="p">,</span><span class="w"> </span><span class="nx">tests</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Generate patterns from tests</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">extractTestPatterns</span><span class="p">(</span><span class="nx">tests</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">sourcePath</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">tests</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">coverage</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">untested</span><span class="o">:</span><span class="w"> </span><span class="kt">this.findUntestedCode</span><span class="p">(</span><span class="nx">sourceAnalysis</span><span class="p">,</span><span class="w"> </span><span class="nx">coverage</span><span class="p">),</span>
+<span class="w">      </span><span class="nx">patterns</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Helper methods...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./explore-tests.sh<span class="w"> </span>src/services/userService.ts
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Shows AI agents how to test specific components
+- Identifies gaps in test coverage
+- Extracts project-specific testing patterns
+- Ensures consistency with existing test approaches</p>
+<h3 id="6-complexity-budget-enforcer">6. Complexity Budget Enforcer<a class="headerlink" href="#6-complexity-budget-enforcer" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Prevent AI agents from generating overly complex solutions.</p>
+<p><strong>Implementation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// complexity-budget.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">ComplexityBudgetEnforcer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">budgets</span><span class="o">:</span><span class="w"> </span><span class="kt">Record</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">ComplexityBudget</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">configPath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">budgets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">loadBudgetsFromConfig</span><span class="p">(</span><span class="nx">configPath</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">analyze</span><span class="p">(</span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">ComplexityAnalysis</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Determine which budget applies</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">budget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">findApplicableBudget</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Analyze actual complexity</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">calculateComplexity</span><span class="p">(</span><span class="nx">code</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Check if within budget</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">within</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">isWithinBudget</span><span class="p">(</span><span class="nx">actual</span><span class="p">,</span><span class="w"> </span><span class="nx">budget</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">path</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">budget</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">actual</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">within</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">recommendations</span><span class="o">:</span><span class="w"> </span><span class="o">!</span><span class="nx">within</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">generateRecommendations</span><span class="p">(</span><span class="nx">actual</span><span class="p">,</span><span class="w"> </span><span class="nx">budget</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">loadBudgetsFromConfig</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">Record</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">ComplexityBudget</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Helper methods...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Example config:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;cyclomatic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;controllers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;cyclomatic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Usage</strong>:
+<div class="highlight"><pre><span></span><code>./check-complexity.sh<span class="w"> </span>src/generated-file.ts
+</code></pre></div></p>
+<p><strong>Benefits</strong>:
+- Prevents complexity creep
+- Enforces different standards for different component types
+- Provides concrete recommendations for simplification
+- Catches complexity issues early</p>
+<h2 id="patterns-for-scale-from-small-to-large-projects">Patterns for Scale: From Small to Large Projects<a class="headerlink" href="#patterns-for-scale-from-small-to-large-projects" title="Permanent link">&para;</a></h2>
+<h3 id="for-small-projects-1-5-developers">For Small Projects (1-5 developers)<a class="headerlink" href="#for-small-projects-1-5-developers" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Simplified Toolchain</strong>:</li>
+<li>Focus on log insulation and basic documentation access</li>
+<li>Use .clinerules with emphasis on simplicity</li>
+<li>
+<p>Implement lightweight static analysis</p>
+</li>
+<li>
+<p><strong>Progressive Enhancement</strong>:</p>
+</li>
+<li>Start with manual analysis and gradually automate</li>
+<li>Prioritize domain model understanding</li>
+<li>
+<p>Use minimal architectural enforcement</p>
+</li>
+<li>
+<p><strong>Key Tools to Implement First</strong>:</p>
+</li>
+<li><code>./build-local.sh</code> for build insulation</li>
+<li><code>./search-docs.sh</code> for documentation access</li>
+<li>Basic <code>.clinerules</code> file with 3-5 core tools</li>
+</ol>
+<h3 id="for-medium-projects-5-20-developers">For Medium Projects (5-20 developers)<a class="headerlink" href="#for-medium-projects-5-20-developers" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Standardized Workflows</strong>:</li>
+<li>Create workflow definitions in <code>.clinerules</code></li>
+<li>Implement domain model extractors</li>
+<li>
+<p>Add test coverage exploration</p>
+</li>
+<li>
+<p><strong>Team Coordination</strong>:</p>
+</li>
+<li>Share AI prompt templates between team members</li>
+<li>Standardize architecture validation rules</li>
+<li>
+<p>Implement design pattern templates</p>
+</li>
+<li>
+<p><strong>Key Tools to Implement First</strong>:</p>
+</li>
+<li>Domain model visualization</li>
+<li>Architectural pattern validation</li>
+<li>Test coverage explorer</li>
+<li>Context compression for larger codebases</li>
+</ol>
+<h3 id="for-large-projects-20-developers">For Large Projects (20+ developers)<a class="headerlink" href="#for-large-projects-20-developers" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Enterprise Integration</strong>:</li>
+<li>Connect AI tooling with existing CI/CD pipelines</li>
+<li>Implement comprehensive validation pipelines</li>
+<li>
+<p>Create domain-specific language tooling</p>
+</li>
+<li>
+<p><strong>Governance and Standards</strong>:</p>
+</li>
+<li>Enforce complexity budgets based on component types</li>
+<li>Implement security and compliance validation</li>
+<li>
+<p>Maintain pattern libraries with versioning</p>
+</li>
+<li>
+<p><strong>Key Tools to Implement First</strong>:</p>
+</li>
+<li>Context compression for monorepo navigation</li>
+<li>Advanced architectural validation</li>
+<li>Complexity budget enforcement</li>
+<li>Security and compliance validation</li>
+</ol>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>AI-native developer tooling represents a significant opportunity to enhance the effectiveness of AI coding agents. By designing tools that address the specific needs and limitations of AI models, we can achieve:</p>
+<ul>
+<li><strong>Higher Quality Output</strong>: Better-informed agents produce better code</li>
+<li><strong>Reduced Review Cycles</strong>: Catch issues before they reach human review</li>
+<li><strong>Consistent Architecture</strong>: Enforce architectural patterns automatically</li>
+<li><strong>Domain Knowledge Integration</strong>: Provide agents with necessary context</li>
+</ul>
+<p>The patterns described in this guide can be adapted to projects of any size. Start with the foundational approaches that address your immediate pain points, then gradually expand your tooling ecosystem as your experience with AI agents grows.</p>
+<p>Remember that effective AI tooling should evolve alongside your project and your team's workflow. Regularly evaluate which tools provide the most value and be willing to refine your approach based on real-world experience.</p>
+<p>By investing in AI-native tooling, you'll create a development environment where AI agents can truly shine as productive members of your development team.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

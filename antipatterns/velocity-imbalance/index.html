@@ -1,0 +1,1416 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A guide to best practices and anti-patterns in AI development">
+      
+      
+        <meta name="author" content="AI Development Team">
+      
+      
+      
+        <link rel="prev" href="../test-driven-design/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Velocity Imbalance - AI Development Practices Guide</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#velocity-imbalance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AI Development Practices Guide" class="md-header__button md-logo" aria-label="AI Development Practices Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AI Development Practices Guide
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Velocity Imbalance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aaronsb/ai-dev-practices-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-dev-practices-guide
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AI Development Practices Guide" class="md-nav__button md-logo" aria-label="AI Development Practices Guide" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    AI Development Practices Guide
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aaronsb/ai-dev-practices-guide" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ai-dev-practices-guide
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/book-introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Book Introduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../best-practices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Best Practices
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Best Practices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/ai-tooling-guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Tooling Guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/collaborative-workflow-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Collaborative Workflow Integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/cyclomatic-complexity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cyclomatic Complexity
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../best-practices/factory-pattern/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Factory Pattern
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Anti-Patterns
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Anti-Patterns
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-tooling-antipatterns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AI Tooling Antipatterns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context-overwhelming/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Context Overwhelming
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependency-blindness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dependency Blindness
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../glossary-avoidance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Glossary Avoidance
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../historical-amnesia/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Historical Amnesia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../implementation-tunneling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Implementation Tunneling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inconsistent-conventions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inconsistent Conventions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../library-reinvention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Library Reinvention
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../premature-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Premature Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../purpose-drift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Purpose Drift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../separation-of-concerns/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Separation of Concerns
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutionism/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Solutionism
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../test-driven-design/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Velocity Imbalance
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Velocity Imbalance
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-spot-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Spot It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-its-harmful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why It's Harmful
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-do-about-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      What to Do About It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-fixing-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Fixing This
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-velocity-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing Velocity Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing Velocity Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-capacity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Capacity Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-output-governor" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Output Governor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-in-cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration in CI/CD Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-in-clinerules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include in .clinerules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-spot-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Spot It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-its-harmful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why It's Harmful
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-do-about-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      What to Do About It
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#benefits-of-fixing-this" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Fixing This
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-velocity-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementing Velocity Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementing Velocity Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-capacity-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Capacity Analysis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-output-governor" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI Output Governor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-in-cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration in CI/CD Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-in-clinerules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include in .clinerules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="velocity-imbalance">Velocity Imbalance<a class="headerlink" href="#velocity-imbalance" title="Permanent link">&para;</a></h1>
+<p>When AI agents generate code at a pace that far exceeds the team's capacity to review, test, and integrate it. This creates a bottleneck where the volume of AI-generated code overwhelms the human-driven processes meant to ensure quality, leading to reduced scrutiny, integration delays, or bypassed review processes.</p>
+<h2 id="how-to-spot-it">How to Spot It<a class="headerlink" href="#how-to-spot-it" title="Permanent link">&para;</a></h2>
+<p>Look for these signs:</p>
+<ul>
+<li>Large backlogs of AI-generated code awaiting review</li>
+<li>Decreasing thoroughness of code reviews as volume increases</li>
+<li>Extending deadlines due to integration bottlenecks</li>
+<li>Team members expressing frustration with review workload</li>
+<li>Increasing time between code generation and deployment</li>
+<li>Pressure to approve changes without adequate review</li>
+<li>Rise in post-integration issues and bug reports</li>
+</ul>
+<h2 id="why-its-harmful">Why It's Harmful<a class="headerlink" href="#why-its-harmful" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Quality suffers when reviews become cursory</li>
+<li>Creates pressure to rush or skip proper validation</li>
+<li>May lead to integration of untested or under-reviewed code</li>
+<li>Demoralizes team members with overwhelming review queues</li>
+<li>Makes tracking the state of the project difficult</li>
+<li>Disrupts planning and velocity predictions</li>
+<li>May lead to rushed deployments or feature releases</li>
+</ul>
+<h2 id="what-to-do-about-it">What to Do About It<a class="headerlink" href="#what-to-do-about-it" title="Permanent link">&para;</a></h2>
+<p>When you see this happening:</p>
+<ol>
+<li>Say "Let's slow down and ensure we can properly review what we've created."</li>
+<li>Suggest "Instead of generating more code, let's focus on integrating what we have."</li>
+<li>Ask "What's our current review capacity and how should we pace our development?"</li>
+<li>Establish "Let's create smaller, focused changes that are easier to review."</li>
+</ol>
+<p>To prevent it next time:</p>
+<ol>
+<li>Implement "velocity governor" tools that match AI output to team capacity</li>
+<li>Create review complexity estimators to better distribute review workload</li>
+<li>Develop progressive enhancement patterns for features</li>
+<li>Establish clear priorities for which components to develop first</li>
+<li>Build batch size limiters that restrict the amount of pending changes</li>
+</ol>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<p><strong>Human</strong>: "Can you implement these five new features for our application?"</p>
+<p><strong>AI</strong>: "Rather than implementing all five features at once, which would create a large review burden, let's prioritize them and tackle them sequentially. Which feature would provide the most value to start with? We can implement that one with thorough testing and documentation, get it through review and integration, and then proceed to the next one."</p>
+<h2 id="benefits-of-fixing-this">Benefits of Fixing This<a class="headerlink" href="#benefits-of-fixing-this" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Better quality through thorough reviews</li>
+<li>More sustainable development pace</li>
+<li>Improved team morale and reduced burnout</li>
+<li>Clearer project status and progress tracking</li>
+<li>Better alignment between generation and integration </li>
+<li>More predictable feature delivery</li>
+<li>Reduced risk of quality issues in production</li>
+</ul>
+<h2 id="implementing-velocity-management">Implementing Velocity Management<a class="headerlink" href="#implementing-velocity-management" title="Permanent link">&para;</a></h2>
+<h3 id="production-capacity-analysis">Production Capacity Analysis<a class="headerlink" href="#production-capacity-analysis" title="Permanent link">&para;</a></h3>
+<p>Create a tool to analyze the team's review and integration capacity:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="c1"># analyze-velocity.sh</span>
+
+<span class="c1"># Analyze recent PR review velocity</span>
+<span class="nv">recent_days</span><span class="o">=</span><span class="m">30</span>
+<span class="nv">avg_review_time</span><span class="o">=</span><span class="k">$(</span>gh<span class="w"> </span>pr<span class="w"> </span>list<span class="w"> </span>--state<span class="w"> </span>closed<span class="w"> </span>--limit<span class="w"> </span><span class="m">100</span><span class="w"> </span>--json<span class="w"> </span>closedAt,createdAt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;map((.closedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add/length/86400&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.1f&quot;, $1}&#39;</span><span class="k">)</span>
+
+<span class="nv">avg_pr_size</span><span class="o">=</span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">recent_days</span><span class="si">}</span><span class="s2"> days ago&quot;</span><span class="w"> </span>--numstat<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^[0-9]+\s+[0-9]+\s+/ {plus+=$1; minus+=$2} END {print plus+minus}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">recent_days</span><span class="si">}</span><span class="s2"> days ago&quot;</span><span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;%H&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1/count}&#39;</span><span class="k">)</span>
+
+<span class="nv">daily_throughput</span><span class="o">=</span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>--since<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">recent_days</span><span class="si">}</span><span class="s2"> days ago&quot;</span><span class="w"> </span>--numstat<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^[0-9]+\s+[0-9]+\s+/ {plus+=$1; minus+=$2} END {print plus+minus}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">days</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$recent_days</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1/days}&#39;</span><span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Team Velocity Analysis:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=======================&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Average review time: </span><span class="si">${</span><span class="nv">avg_review_time</span><span class="si">}</span><span class="s2"> days&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Average commit size: </span><span class="si">${</span><span class="nv">avg_pr_size</span><span class="si">}</span><span class="s2"> lines&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Daily code throughput: </span><span class="si">${</span><span class="nv">daily_throughput</span><span class="si">}</span><span class="s2"> lines&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Recommendations:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---------------&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Maximum new PR size: </span><span class="k">$((</span><span class="nv">avg_pr_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="k">))</span><span class="s2"> lines&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Maximum WIP code: </span><span class="k">$((</span><span class="nv">daily_throughput</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">3</span><span class="k">))</span><span class="s2"> lines&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Target PR count: </span><span class="k">$((</span><span class="nv">daily_throughput</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">avg_pr_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">avg_review_time</span><span class="k">))</span><span class="s2"> PRs&quot;</span>
+</code></pre></div>
+<h3 id="ai-output-governor">AI Output Governor<a class="headerlink" href="#ai-output-governor" title="Permanent link">&para;</a></h3>
+<p>Create a mechanism to limit AI output based on team capacity:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// velocity-governor.ts</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">VelocityGovernor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">pendingReviewLines</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="nx">capacityConfig</span><span class="o">:</span><span class="w"> </span><span class="kt">CapacityConfig</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">configPath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">capacityConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">loadConfig</span><span class="p">(</span><span class="nx">configPath</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">syncWithCurrentState</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">canGenerateMore</span><span class="p">(</span><span class="nx">estimatedLines</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pendingReviewLines</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">estimatedLines</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">capacityConfig</span><span class="p">.</span><span class="nx">maxPendingLines</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">registerGeneratedCode</span><span class="p">(</span><span class="nx">filePath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">lineCount</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">pendingReviewLines</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">lineCount</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">persistState</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">registerCompletedReview</span><span class="p">(</span><span class="nx">filePath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Get the line count of the file</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">lineCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">getFileLineCount</span><span class="p">(</span><span class="nx">filePath</span><span class="p">);</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">pendingReviewLines</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="nx">lineCount</span><span class="p">;</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">persistState</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="nx">getCurrentUtilization</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="nx">UtilizationStats</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">pendingLines</span><span class="o">:</span><span class="w"> </span><span class="kt">this.pendingReviewLines</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">capacityLimit</span><span class="o">:</span><span class="w"> </span><span class="kt">this.capacityConfig.maxPendingLines</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">utilizationPercentage</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">pendingReviewLines</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">capacityConfig</span><span class="p">.</span><span class="nx">maxPendingLines</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">100</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">estimatedClearTime</span><span class="o">:</span><span class="w"> </span><span class="kt">this.pendingReviewLines</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">capacityConfig</span><span class="p">.</span><span class="nx">dailyThroughput</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">syncWithCurrentState</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Calculate pending lines from current PRs</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">pendingReviewLines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">calculatePendingReviewLines</span><span class="p">();</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">persistState</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="ow">void</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Save current state to file</span>
+<span class="w">    </span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span>
+<span class="w">      </span><span class="s1">&#39;.velocity-state.json&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">      </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="nx">pendingReviewLines</span><span class="o">:</span><span class="w"> </span><span class="kt">this.pendingReviewLines</span><span class="w"> </span><span class="p">})</span>
+<span class="w">    </span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">loadConfig</span><span class="p">(</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nx">CapacityConfig</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Load team capacity configuration</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;utf8&#39;</span><span class="p">));</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">config</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">calculatePendingReviewLines</span><span class="p">()</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation to calculate lines of code in PRs</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">getFileLineCount</span><span class="p">(</span><span class="nx">filePath</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Implementation to count lines in a file</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="integration-in-cicd-pipeline">Integration in CI/CD Pipeline<a class="headerlink" href="#integration-in-cicd-pipeline" title="Permanent link">&para;</a></h3>
+<p>Add checks to prevent PR overload:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/velocity-check.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Velocity Check</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">opened</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">synchronize</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">check-velocity</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check team capacity</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">./analyze-velocity.sh &gt; velocity.txt</span>
+
+<span class="w">          </span><span class="no"># Get number of open PRs</span>
+<span class="w">          </span><span class="no">OPEN_PRS=$(gh pr list --json number | jq length)</span>
+
+<span class="w">          </span><span class="no"># Get maximum recommended PRs</span>
+<span class="w">          </span><span class="no">MAX_PRS=$(grep &quot;Target PR count&quot; velocity.txt | awk &#39;{print $NF}&#39;)</span>
+
+<span class="w">          </span><span class="no"># Check if we&#39;re over capacity</span>
+<span class="w">          </span><span class="no">if (( OPEN_PRS &gt; MAX_PRS )); then</span>
+<span class="w">            </span><span class="no">echo &quot;::warning::Team is over review capacity with $OPEN_PRS open PRs (recommended max: $MAX_PRS)&quot;</span>
+<span class="w">            </span><span class="no">echo &quot;Consider waiting for existing PRs to be merged before creating new ones.&quot;</span>
+<span class="w">          </span><span class="no">fi</span>
+
+<span class="w">          </span><span class="no"># Check PR size</span>
+<span class="w">          </span><span class="no">PR_ADDITIONS=$(gh pr view ${{ github.event.pull_request.number }} --json additions --jq .additions)</span>
+<span class="w">          </span><span class="no">PR_DELETIONS=$(gh pr view ${{ github.event.pull_request.number }} --json deletions --jq .deletions)</span>
+<span class="w">          </span><span class="no">PR_SIZE=$((PR_ADDITIONS + PR_DELETIONS))</span>
+
+<span class="w">          </span><span class="no">MAX_SIZE=$(grep &quot;Maximum new PR size&quot; velocity.txt | awk &#39;{print $NF}&#39;)</span>
+
+<span class="w">          </span><span class="no">if (( PR_SIZE &gt; MAX_SIZE )); then</span>
+<span class="w">            </span><span class="no">echo &quot;::warning::PR is larger than recommended size ($PR_SIZE lines, recommended max: $MAX_SIZE)&quot;</span>
+<span class="w">            </span><span class="no">echo &quot;Consider breaking this PR into smaller, more focused changes.&quot;</span>
+<span class="w">          </span><span class="no">fi</span>
+</code></pre></div>
+<h3 id="include-in-clinerules">Include in .clinerules<a class="headerlink" href="#include-in-clinerules" title="Permanent link">&para;</a></h3>
+<p>Add velocity management to your <code>.clinerules</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tooling</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">velocity_management</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./analyze-velocity.sh</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Check</span><span class="nv"> </span><span class="s">team</span><span class="nv"> </span><span class="s">capacity</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">review</span><span class="nv"> </span><span class="s">velocity&quot;</span>
+<span class="w">    </span><span class="nt">when</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Before</span><span class="nv"> </span><span class="s">starting</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">feature&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;When</span><span class="nv"> </span><span class="s">planning</span><span class="nv"> </span><span class="s">work&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Before</span><span class="nv"> </span><span class="s">creating</span><span class="nv"> </span><span class="s">large</span><span class="nv"> </span><span class="s">PRs&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;When</span><span class="nv"> </span><span class="s">prioritizing</span><span class="nv"> </span><span class="s">tasks&quot;</span>
+<span class="w">    </span><span class="nt">examples</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;./analyze-velocity.sh&quot;</span>
+
+<span class="nt">workflows</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">new_feature</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Check</span><span class="nv"> </span><span class="s">team</span><span class="nv"> </span><span class="s">velocity</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">capacity&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Prioritize</span><span class="nv"> </span><span class="s">based</span><span class="nv"> </span><span class="s">on</span><span class="nv"> </span><span class="s">current</span><span class="nv"> </span><span class="s">workload&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Size</span><span class="nv"> </span><span class="s">implementation</span><span class="nv"> </span><span class="s">appropriately&quot;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;Break</span><span class="nv"> </span><span class="s">down</span><span class="nv"> </span><span class="s">large</span><span class="nv"> </span><span class="s">features&quot;</span>
+<span class="w">    </span><span class="nt">tools</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">velocity_management</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git_workflow</span>
+</code></pre></div>
+<p>By implementing these patterns, teams can maintain a healthy balance between AI-powered code generation and human-driven quality processes.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.indexes", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>
