@@ -95,7 +95,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Deployment
 
-The documentation is automatically deployed to GitHub Pages when changes are pushed to the main branch, using GitHub Actions.
+The deployment process works in two stages:
+
+1. **GitHub Actions Workflow**: When changes are pushed to the main branch, a GitHub Actions workflow builds the MkDocs site and pushes the generated content to the `gh-pages` branch.
+
+2. **GitHub Pages**: GitHub's built-in Pages service then detects changes to the `gh-pages` branch and deploys the content to the public site at https://aaronsb.github.io/ai-dev-practices-guide/.
+
+This two-stage process ensures that your documentation is always up-to-date with the content in your main branch.
 
 ## License
 
