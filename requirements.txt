@@ -2,3 +2,4 @@ mkdocs>=1.4.0
 mkdocs-material>=9.0.0
 pillow>=9.0.0
 cairosvg>=2.5.0
+mkdocs-include-dir-to-nav>=1.0.0

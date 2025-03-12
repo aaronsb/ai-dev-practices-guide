@@ -7,8 +7,22 @@ repo_name: ai-dev-practices-guide
 theme:
   name: material
   palette:
-    primary: indigo
-    accent: indigo
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
   features:
     - navigation.instant
     - navigation.tracking
@@ -19,7 +33,11 @@ theme:
 markdown_extensions:
   - admonition
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.tabbed
@@ -27,29 +45,19 @@ markdown_extensions:
   - toc:
       permalink: true
 
+plugins:
+  - search
+  - include_dir_to_nav:
+      file_name_as_title: true  # Use filenames as titles first
+      sort_file: true
+      sort_directory: true
+      flat: false  # Keep subdirectories as sections
+      recurse: true  # Recursively scan directories
+      include_empty_dir: false
+
+
 nav:
   - Home: index.md
-  - Overview:
-    - Book Introduction: overview/book-introduction.md
-  - Best Practices:
-    - best-practices/index.md
-    - AI Tooling Guide: best-practices/ai-tooling-guide.md
-    - Collaborative Workflow Integration: best-practices/collaborative-workflow-integration.md
-    - Cyclomatic Complexity: best-practices/cyclomatic-complexity.md
-    - Factory Pattern: best-practices/factory-pattern.md
-  - Anti-Patterns:
-    - antipatterns/index.md
-    - AI Tooling Antipatterns: antipatterns/ai-tooling-antipatterns.md
-    - Context Overwhelming: antipatterns/context-overwhelming.md
-    - Dependency Blindness: antipatterns/dependency-blindness.md
-    - Glossary Avoidance: antipatterns/glossary-avoidance.md
-    - Historical Amnesia: antipatterns/historical-amnesia.md
-    - Implementation Tunneling: antipatterns/implementation-tunneling.md
-    - Inconsistent Conventions: antipatterns/inconsistent-conventions.md
-    - Library Reinvention: antipatterns/library-reinvention.md
-    - Premature Architecture: antipatterns/premature-architecture.md
-    - Purpose Drift: antipatterns/purpose-drift.md
-    - Separation of Concerns: antipatterns/separation-of-concerns.md
-    - Solutionism: antipatterns/solutionism.md
-    - Test Driven Design: antipatterns/test-driven-design.md
-    - Velocity Imbalance: antipatterns/velocity-imbalance.md
+  - Overview: overview
+  - Best Practices: best-practices
+  - Anti-Patterns: antipatterns

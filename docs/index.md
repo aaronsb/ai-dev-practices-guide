@@ -4,7 +4,10 @@ Welcome to the AI Coding Agent Practices documentation. This site provides guida
 
 ## What You'll Find Here
 
-This documentation is organized into two main sections:
+This documentation is organized into three main sections:
+### [Overview](overview/index.md)
+
+An overview of the problem space and the foundational thinking that promoted the set of practical strategies contained herein.
 
 ### [Antipatterns](antipatterns/index.md)
 
