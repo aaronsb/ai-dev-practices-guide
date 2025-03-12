@@ -1,0 +1,123 @@
+/* Custom animations for AI Development Practices Guide */
+
+/* Animated gradient background for the header */
+.md-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.md-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 150, 136, 0.1) 0%,
+    rgba(0, 150, 136, 0) 50%,
+    rgba(255, 87, 34, 0.1) 100%
+  );
+  z-index: -1;
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Subtle hover effect for navigation items */
+.md-nav__item a:hover {
+  transform: translateX(3px);
+  transition: transform 0.2s ease;
+}
+
+/* Subtle pulse animation for admonition blocks */
+.md-typeset .admonition {
+  position: relative;
+  overflow: hidden;
+}
+
+.md-typeset .admonition::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0;
+  z-index: -1;
+  animation: pulseFade 3s ease-in-out infinite;
+}
+
+@keyframes pulseFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Subtle floating animation for code blocks */
+.md-typeset pre {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.md-typeset pre:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Subtle background pattern animation */
+.md-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.md-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(0, 150, 136, 0.03) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, rgba(255, 87, 34, 0.03) 2%, transparent 0%);
+  background-size: 100px 100px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+  animation: patternShift 60s linear infinite;
+}
+
+@keyframes patternShift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
