@@ -1,6 +1,6 @@
 # Best Practices for AI-Assisted Coding
 
-This section provides guidelines and patterns for effective collaboration with AI coding assistants. These best practices will help you maintain code quality, manage complexity, and implement robust solutions when working with AI tools.
+This section provides guidelines and patterns for effective collaboration with AI coding assistants. These best practices will help you maintain code quality, manage complexity, and implement robust solutions when working with AI tools. If you find a best practice that works for you, please consider starting a discussion or starting a pull request to add it to this guide.
 
 ## Available Guides
 
@@ -23,6 +23,16 @@ A detailed guide to implementing the Factory Pattern for MCP servers with REST A
 - Schema definition and validation
 - REST API integration strategies
 - Benefits of the factory-based architecture
+
+### [AI-Supportive Developer Tooling](ai-tooling-guide.md)
+
+A comprehensive guide to designing and implementing developer tools optimized for AI coding agents:
+
+- Core principles of AI-native tooling (token efficiency, deterministic environments)
+- Implementation patterns including log insulation and domain knowledge indexing
+- Project-specific tooling examples with code implementations
+- Strategies for implementing .clinerules for AI agent guidance
+- Scaling approaches for projects of different sizes and complexities
 
 ## General Principles
 
