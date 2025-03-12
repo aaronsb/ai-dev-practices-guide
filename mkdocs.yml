@@ -31,12 +31,21 @@ nav:
   - Home: index.md
   - Best Practices:
     - best-practices/index.md
+    - AI Tooling Guide: best-practices/ai-tooling-guide.md
     - Cyclomatic Complexity: best-practices/cyclomatic-complexity.md
     - Factory Pattern: best-practices/factory-pattern.md
   - Anti-Patterns:
     - antipatterns/index.md
+    - AI Tooling Antipatterns: antipatterns/ai-tooling-antipatterns.md
+    - Context Overwhelming: antipatterns/context-overwhelming.md
+    - Dependency Blindness: antipatterns/dependency-blindness.md
+    - Glossary Avoidance: antipatterns/glossary-avoidance.md
+    - Historical Amnesia: antipatterns/historical-amnesia.md
+    - Implementation Tunneling: antipatterns/implementation-tunneling.md
+    - Inconsistent Conventions: antipatterns/inconsistent-conventions.md
     - Library Reinvention: antipatterns/library-reinvention.md
     - Premature Architecture: antipatterns/premature-architecture.md
     - Purpose Drift: antipatterns/purpose-drift.md
     - Separation of Concerns: antipatterns/separation-of-concerns.md
+    - Solutionism: antipatterns/solutionism.md
     - Test Driven Design: antipatterns/test-driven-design.md
